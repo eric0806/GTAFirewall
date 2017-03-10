@@ -117,17 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dis_gta" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dis_gta.bat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;big5</value>
-  </data>
-  <data name="edDisable" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edDisable.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="edEnable" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\edEnable.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ena_gta" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ena_gta.bat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;big5</value>
-  </data>
 </root>
