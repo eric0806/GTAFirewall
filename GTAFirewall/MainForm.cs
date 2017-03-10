@@ -34,6 +34,23 @@ namespace GTAFirewall {
         }
 
         /// <summary>
+        /// 防火牆檢查狀態
+        /// </summary>
+        enum FirewallCheckStatus {
+            NotExists = 0,
+            Exists = 1,
+            Error = 99
+        }
+
+        /// <summary>
+        /// 在執行Process時是否發生錯誤
+        /// </summary>
+        bool cmdError = false;
+        /// <summary>
+        /// 執行Process時的錯誤訊息(如果發生錯誤的話)
+        /// </summary>
+        string cmdErrorMessage = string.Empty;
+        /// <summary>
         /// GTA5.exe執行檔的完整路徑
         /// </summary>
         string gtaFullPath;
@@ -47,7 +64,10 @@ namespace GTAFirewall {
             InitializeComponent();
 
             //初始化GTA路徑
-            InitPath();
+            if (!InitPath()) {
+                this.Close();
+                return;
+            }
 
             //註冊三個Hotkey
             int id = 0;
@@ -93,10 +113,28 @@ namespace GTAFirewall {
         /// <summary>
         /// 由設定檔讀取並產生完整的GTA5.exe執行檔路徑
         /// </summary>
-        void InitPath() {
-            var path = ConfigurationManager.AppSettings["GTAPath"];
-            var name = ConfigurationManager.AppSettings["GTAExe"];
-            gtaFullPath = Path.Combine(path, name);
+        bool InitPath() {
+            var file = ".\\path.txt";
+            if (!File.Exists(file)) {
+                MessageBox.Show("您沒有path.txt!!\n請在程式相同目錄底下建立path.txt，\n並設定GTA的路徑!", "找不到檔案", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            try {
+                gtaFullPath = File.ReadLines(file).FirstOrDefault();
+                if (string.IsNullOrWhiteSpace(gtaFullPath)) {
+                    MessageBox.Show("您沒有設定GTA5.exe的路徑!\n請設定後再重試一次!", "檔案內容錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            catch {
+                MessageBox.Show("開啟path.txt錯誤!", "開啟檔案錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (!File.Exists(gtaFullPath)) {
+                MessageBox.Show("找不到GTA5.exe!\n請檢查路徑設定!!", "找不到檔案", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
         }
 
 
@@ -105,15 +143,86 @@ namespace GTAFirewall {
         /// <para>如果防火牆內無此規則，則建立兩個規則(in和out)來關閉連線；若有此規則，則刪除他們來恢復連線</para>
         /// </summary>
         void AutomatingFirewall() {
-            //var arg = $"advfirewall firewall show rule name={RULE_NAME} | findstr /C:{RULE_NAME}";
-            var arg = $"advfirewall firewall show rule name=\"{RULE_NAME}\"";
-            var cmdResult = RunProcess("netsh", arg);
-            var regex = new Regex(RULE_NAME, RegexOptions.Multiline);
-            var matches = regex.Matches(cmdResult);
-            MessageBox.Show(matches.Count.ToString());
+            switch (RuleExists()) {
+                case FirewallCheckStatus.Exists: {
+                        //如果規則存在，表示目前gta無法連網，要將之啟用(刪除規則)
+                        var result = DelRules();
+                        if (!result.Item1) {
+                            MessageBox.Show(result.Item2, "發生錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else {
+                            PlaySound(true);
+                        }
+                        break;
+                    }
+                case FirewallCheckStatus.NotExists: {
+                        //反之則表示gta可連網，要新增規則將他斷網
+                        var result = AddRules();
+                        if (!result.Item1) {
+                            MessageBox.Show(result.Item2, "發生錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else {
+                            PlaySound(false);
+                        }
+                        break;
+                    }
+                case FirewallCheckStatus.Error: {
+                        //發生錯誤
+                        MessageBox.Show(cmdErrorMessage, "發生錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+            }
         }
 
+        /// <summary>
+        /// 檢查規則是否已存在
+        /// </summary>
+        /// <returns></returns>
+        FirewallCheckStatus RuleExists() {
+            var arg = $"advfirewall firewall show rule name=\"{RULE_NAME}\"";
+            var cmdResult = RunProcess("netsh", arg);
+            if (cmdError) {
+                return FirewallCheckStatus.Error;
+            }
+            else {
+                var regex = new Regex(RULE_NAME, RegexOptions.Multiline | RegexOptions.IgnoreCase);
+                return regex.IsMatch(cmdResult) ? FirewallCheckStatus.Exists : FirewallCheckStatus.NotExists;
+            }
+        }
 
+        /// <summary>
+        /// 增加規則(GTA禁止連網)
+        /// </summary>
+        /// <returns></returns>
+        Tuple<bool, string> AddRules() {
+            DelRules();
+            var arg1 = $"advfirewall firewall add rule name=\"{RULE_NAME}\" dir=in action=block program=\"{gtaFullPath}\" enable=yes";
+            var result1 = RunProcess("netsh", arg1);
+            if (cmdError) {
+                return new Tuple<bool, string>(false, $"發生錯誤(1):{cmdErrorMessage}");
+            }
+            var arg2 = $"advfirewall firewall add rule name=\"{RULE_NAME}\" dir=out action=block program=\"{gtaFullPath}\" enable=yes";
+            var result2 = RunProcess("netsh", arg2);
+            if (cmdError) {
+                return new Tuple<bool, string>(false, $"發生錯誤(2):{cmdErrorMessage}");
+            }
+            
+            return new Tuple<bool, string>(true, "");
+        }
+
+        /// <summary>
+        /// 刪除規則(GTA可以連網)
+        /// </summary>
+        /// <returns></returns>
+        Tuple<bool, string> DelRules() {
+            var arg = $"advfirewall firewall delete rule name=\"{RULE_NAME}\"";
+            var result = RunProcess("netsh", arg);
+            if (cmdError) {
+                return new Tuple<bool, string>(false, $"發生錯誤(3):{cmdErrorMessage}");
+            }
+            
+            return new Tuple<bool, string>(true, "");
+        }
 
         /// <summary>
         /// 執行指令並回傳執行結果(文字)
@@ -122,12 +231,30 @@ namespace GTAFirewall {
         /// <param name="arg"></param>
         /// <returns></returns>
         string RunProcess(string cmd, string arg) {
-            var proc = new ProcessStartInfo(cmd, arg);
-            proc.RedirectStandardOutput = true;
-            proc.UseShellExecute = false;
-            proc.CreateNoWindow = true;
+            cmdError = false;
+            cmdErrorMessage = string.Empty;
+            var procInfo = new ProcessStartInfo(cmd, arg);
+            procInfo.RedirectStandardOutput = true;
+            procInfo.UseShellExecute = false;
+            procInfo.CreateNoWindow = true;
 
-            return Process.Start(proc).StandardOutput.ReadToEnd();
+            var process = new Process();
+            process.StartInfo = procInfo;
+            process.ErrorDataReceived += Process_ErrorDataReceived;
+            process.Start();
+            var standardOutput = process.StandardOutput.ReadToEnd();
+            //MessageBox.Show(standardOutput);
+            return standardOutput;
+        }
+
+        /// <summary>
+        /// 收到錯誤資料時的處理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e) {
+            cmdError = true;
+            cmdErrorMessage = e.Data;
         }
 
         /// <summary>
