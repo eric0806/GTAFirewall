@@ -88,6 +88,8 @@ namespace GTAFirewall {
             UnregisterHotKey(this.Handle, 0);
             UnregisterHotKey(this.Handle, 1);
             UnregisterHotKey(this.Handle, 2);
+            //刪除防火牆規則，免得忘了開，下次連不上
+            DelRules();
         }
 
         /// <summary>
