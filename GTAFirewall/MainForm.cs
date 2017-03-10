@@ -65,7 +65,7 @@ namespace GTAFirewall {
 
             //初始化GTA路徑
             if (!InitPath()) {
-                this.Close();
+                Environment.Exit(0);
                 return;
             }
 
@@ -271,6 +271,5 @@ namespace GTAFirewall {
             }
             player.Play();
         }
-
     }
 }
