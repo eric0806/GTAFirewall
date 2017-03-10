@@ -61,29 +61,6 @@ namespace GTAFirewall.Properties {
         }
         
         /// <summary>
-        ///   查詢類似 @echo off
-        ///::務必先設定好GTA5.exe執行檔的位置，否則防火牆不會有作用
-        ///SET GTAPath=&quot;D:\SteamLibrary\steamapps\common\Grand Theft Auto V\gta5.exe&quot;
-        ///
-        ///::########################################## 注意底下請勿修改 ##########################################
-        ///SET RuleName=&quot;GTA 5 單人公開戰局用&quot;
-        ///SET File=&quot;.check&quot;
-        ///
-        ///netsh advfirewall firewall show rule name=%RuleName% | findstr /C:%RuleName% &gt; %File%
-        ///
-        ///FOR /F &quot;usebackq&quot; %%A IN (&apos;%File%&apos;) DO set size=%%~zA
-        ///
-        ///if %size% EQU 0 (
-        ///    ::如果找不到該規則，則要新增
-        ///    netsh advfirewall firewall add rule name=%RuleNam [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
-        /// </summary>
-        internal static string dis_gta {
-            get {
-                return ResourceManager.GetString("dis_gta", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream edDisable {
@@ -98,29 +75,6 @@ namespace GTAFirewall.Properties {
         internal static System.IO.UnmanagedMemoryStream edEnable {
             get {
                 return ResourceManager.GetStream("edEnable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類似 @echo off
-        ///::務必先設定好GTA5.exe執行檔的位置，否則防火牆不會有作用
-        ///SET GTAPath=&quot;D:\SteamLibrary\steamapps\common\Grand Theft Auto V\gta5.exe&quot;
-        ///
-        ///::########################################## 注意底下請勿修改 ##########################################
-        ///SET RuleName=&quot;GTA 5 單人公開戰局用&quot;
-        ///SET File=&quot;.check&quot;
-        ///
-        ///netsh advfirewall firewall show rule name=%RuleName% | findstr /C:%RuleName% &gt; %File%
-        ///
-        ///FOR /F &quot;usebackq&quot; %%A IN (&apos;%File%&apos;) DO set size=%%~zA
-        ///
-        ///if %size% EQU 0 (
-        ///    ::如果找不到該規則，則要新增
-        ///    netsh advfirewall firewall add rule name=%RuleNam [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
-        /// </summary>
-        internal static string ena_gta {
-            get {
-                return ResourceManager.GetString("ena_gta", resourceCulture);
             }
         }
     }
