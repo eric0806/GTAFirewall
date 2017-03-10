@@ -33,33 +33,34 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Location = new System.Drawing.Point(208, 9);
+            this.label3.Location = new System.Drawing.Point(208, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 62);
+            this.label3.Size = new System.Drawing.Size(109, 66);
             this.label3.TabIndex = 3;
             this.label3.Text = "熱鍵表(3種都可)：\r\nCtrl + F1\r\nCtrl + F12\r\nPause";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 30);
+            this.label1.Size = new System.Drawing.Size(181, 32);
             this.label1.TabIndex = 4;
             this.label1.Text = "程式執行後放著不管它即可。\r\n按下熱鍵即可關閉/開啟GTA網路";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 87);
+            this.ClientSize = new System.Drawing.Size(328, 93);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
+            this.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(344, 126);
-            this.MinimumSize = new System.Drawing.Size(344, 126);
+            this.MaximumSize = new System.Drawing.Size(344, 132);
+            this.MinimumSize = new System.Drawing.Size(344, 132);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "封你GTA的網!  by erika0806";
