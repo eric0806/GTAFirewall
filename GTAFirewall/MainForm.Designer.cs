@@ -55,7 +55,11 @@
             this.ClientSize = new System.Drawing.Size(328, 87);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(344, 126);
+            this.MinimumSize = new System.Drawing.Size(344, 126);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "封你GTA的網!  by erika0806";
