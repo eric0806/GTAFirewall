@@ -26,6 +26,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label_Status = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label3
@@ -48,11 +49,21 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "程式執行後放著不管它即可。\r\n按下熱鍵即可關閉/開啟GTA網路";
             // 
+            // label_Status
+            // 
+            this.label_Status.AutoSize = true;
+            this.label_Status.Location = new System.Drawing.Point(12, 68);
+            this.label_Status.Name = "label_Status";
+            this.label_Status.Size = new System.Drawing.Size(80, 16);
+            this.label_Status.TabIndex = 5;
+            this.label_Status.Text = "狀態：未使用";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(328, 93);
+            this.Controls.Add(this.label_Status);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -74,6 +85,7 @@
 
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_Status;
     }
 }
 
