@@ -9,3 +9,14 @@ C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\bin\Debug\GTAFirewall
 C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.csproj.CoreCompileInputs.cache
 C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.exe
 C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.pdb
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\bin\Debug\path.txt
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\bin\Debug\GTAFirewall.exe.config
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\bin\Debug\GTAFirewall.exe
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\bin\Debug\GTAFirewall.pdb
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.csprojResolveAssemblyReference.cache
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.MainForm.resources
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.Properties.Resources.resources
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.csproj.GenerateResource.cache
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.csproj.CoreCompileInputs.cache
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.exe
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.pdb
