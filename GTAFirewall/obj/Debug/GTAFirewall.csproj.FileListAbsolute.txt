@@ -20,3 +20,4 @@ D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFire
 D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.csproj.CoreCompileInputs.cache
 D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.exe
 D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.pdb
+D:\Projects\Visual Studio\我的專案\GTAFirewall\GTAFirewall\obj\Debug\GTAFirewall.AboutForm.resources

@@ -27,6 +27,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label_Status = new System.Windows.Forms.Label();
+            this.btnAbout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label3
@@ -58,11 +59,22 @@
             this.label_Status.TabIndex = 5;
             this.label_Status.Text = "狀態：未使用";
             // 
+            // btnAbout
+            // 
+            this.btnAbout.Location = new System.Drawing.Point(257, 88);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(59, 23);
+            this.btnAbout.TabIndex = 6;
+            this.btnAbout.Text = "關於";
+            this.btnAbout.UseVisualStyleBackColor = true;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 93);
+            this.ClientSize = new System.Drawing.Size(328, 123);
+            this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.label_Status);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
@@ -70,11 +82,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(344, 132);
-            this.MinimumSize = new System.Drawing.Size(344, 132);
+            this.MaximumSize = new System.Drawing.Size(344, 162);
+            this.MinimumSize = new System.Drawing.Size(344, 162);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "封你GTA的網!  by erika0806";
+            this.Text = "封你GTA的網!";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -86,6 +98,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_Status;
+        private System.Windows.Forms.Button btnAbout;
     }
 }
 

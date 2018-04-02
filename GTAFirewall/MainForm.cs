@@ -321,5 +321,9 @@ namespace GTAFirewall {
             }
             player.Play();
         }
+
+        private void btnAbout_Click(object sender, EventArgs e) {
+            (new AboutForm()).ShowDialog();
+        }
     }
 }
