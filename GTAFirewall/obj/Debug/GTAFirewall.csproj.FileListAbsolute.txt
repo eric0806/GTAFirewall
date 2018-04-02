@@ -1,0 +1,11 @@
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.csprojResolveAssemblyReference.cache
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.MainForm.resources
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.Properties.Resources.resources
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.csproj.GenerateResource.cache
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\bin\Debug\path.txt
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\bin\Debug\GTAFirewall.exe.config
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\bin\Debug\GTAFirewall.exe
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\bin\Debug\GTAFirewall.pdb
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.csproj.CoreCompileInputs.cache
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.exe
+C:\Users\bhunj\Desktop\Temp\GTAFirewall-master\GTAFirewall\obj\Debug\GTAFirewall.pdb

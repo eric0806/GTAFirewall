@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Media;
 using System.Configuration;
 using System.IO;
+using Microsoft.Win32;
 
 namespace GTAFirewall {
     public partial class MainForm : Form {
@@ -64,9 +65,14 @@ namespace GTAFirewall {
             InitializeComponent();
 
             //初始化GTA路徑
-            if (!InitPath()) {
-                Environment.Exit(0);
-                return;
+            //修改(Tast)：預先讀取註冊表
+            if (!RegistryPath())
+            {
+                if (!InitPath())
+                {
+                    Environment.Exit(0);
+                    return;
+                }
             }
 
             //註冊三個Hotkey
@@ -113,7 +119,40 @@ namespace GTAFirewall {
         }
 
         /// <summary>
+        /// 由系統註冊表取得遊戲執行檔路徑 by Tast
+        /// 參考來源：https://stackoverflow.com/a/18234755
+        /// 註冊表：https://forum.gamer.com.tw/Co.php?bsn=4737&sn=246515
+        /// </summary>
+        bool RegistryPath()
+        {
+            try
+            {
+                RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\WOW6432Node\\Rockstar Games\\Grand Theft Auto V");
+                if (key != null)
+                {
+                    Object o = key.GetValue("InstallFolder");
+                    if (o != null)
+                    {
+                        gtaFullPath = o.ToString() + "\\GTA5.exe";
+                        if (!File.Exists(gtaFullPath)) return false;
+                        else
+                        {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)  //just for demonstration...it's always best to handle specific exceptions
+            {
+                Console.WriteLine(ex.Message.ToString());
+                return false;
+            }
+        }
+
+        /// <summary>
         /// 由設定檔讀取並產生完整的GTA5.exe執行檔路徑
+        /// 修改(Tast)：預先從系統註冊表讀取路徑，無目標檔案則回歸設定檔模式
         /// </summary>
         bool InitPath() {
             var file = ".\\path.txt";
@@ -139,7 +178,6 @@ namespace GTAFirewall {
             return true;
         }
 
-
         /// <summary>
         /// 檢查防火牆狀態並自動設定
         /// <para>如果防火牆內無此規則，則建立兩個規則(in和out)來關閉連線；若有此規則，則刪除他們來恢復連線</para>
@@ -151,9 +189,13 @@ namespace GTAFirewall {
                         var result = DelRules();
                         if (!result.Item1) {
                             MessageBox.Show(result.Item2, "發生錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            label_Status.Text = "狀態：規則刪除錯誤(無法准許連線)";
+                            label_Status.ForeColor = System.Drawing.Color.DarkRed;
                         }
                         else {
                             PlaySound(true);
+                            label_Status.Text = "狀態：規則刪除成功(已准許連線)";
+                            label_Status.ForeColor = System.Drawing.Color.ForestGreen;
                         }
                         break;
                     }
@@ -162,15 +204,21 @@ namespace GTAFirewall {
                         var result = AddRules();
                         if (!result.Item1) {
                             MessageBox.Show(result.Item2, "發生錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            label_Status.Text = "狀態：規則建立失敗(無法斷網)";
+                            label_Status.ForeColor = System.Drawing.Color.DarkRed;
                         }
                         else {
                             PlaySound(false);
+                            label_Status.Text = "狀態：規則建立成功(遊戲斷網)";
+                            label_Status.ForeColor = System.Drawing.Color.ForestGreen;
                         }
                         break;
                     }
                 case FirewallCheckStatus.Error: {
                         //發生錯誤
                         MessageBox.Show(cmdErrorMessage, "發生錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        label_Status.Text = "狀態：防火牆??";
+                        label_Status.ForeColor = System.Drawing.Color.DarkRed;
                         break;
                     }
             }
